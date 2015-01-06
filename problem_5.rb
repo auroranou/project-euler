@@ -7,19 +7,21 @@ require 'prime'
 primes = []
 exponents = []
 
-(1..20).each do |n|
-	primes << { num: n, primes: n.prime_division }
+(2..20).each do |n|
+	primes << n.prime_division
 end
 
-primes.each do |prime|
-	prime[:primes].each do |k, v|
-		exponents << k ** v
-	end
+pairs = primes.flatten(1).uniq
+
+groups = pairs.group_by { |pair| pair[0] }
+
+groups.each do |group|
+	exponents << group[1].max_by { |pair| pair[1] }
 end
 
-exponents = exponents.uniq!
-p exponents.inject(:*) / 2
+exponents.map! { |group | group[0] ** group[1]}
 
+p exponents.inject(:*)
 
 # check_nums = (2..20).to_a
 # num = 2520
