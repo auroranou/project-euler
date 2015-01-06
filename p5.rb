@@ -23,6 +23,7 @@ exponents.map! { |group | group[0] ** group[1]}
 
 p exponents.inject(:*)
 
+# bruteforce solution
 # check_nums = (2..20).to_a
 # num = 2520
 
