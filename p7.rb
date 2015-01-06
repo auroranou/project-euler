@@ -2,3 +2,8 @@
 
 # What is the 10,001st prime number?
 
+require 'prime'
+
+Prime.each_with_index(1_000_000) do |prime, i|
+	p prime if i == 10_000
+end
