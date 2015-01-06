@@ -29,10 +29,14 @@ n = 7316717653133062491922511967442657474235534919493496983520312774506326239578
 chars = n.to_s.chars
 segments = []
 
-# converting to strings allows creation of arrays with chars method, calling of each_with_index
 chars.each_with_index do |char, i|
 	segments << chars.slice(i..i+12)
 end
 
 segments.delete_if { |s| s.include? '0' }
 segments.delete_if { |s| s.length != 13 }
+
+map_segments = segments.map { |group| group.map { |s| s.to_i } }
+
+products = map_segments.map { |s| s.inject(:*) }
+p products.max
