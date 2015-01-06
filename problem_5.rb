@@ -4,23 +4,39 @@
 
 require 'prime'
 
-# array = []
-
-# Prime.each(20) do |prime|
-# 	array << prime
-# end 
-
-# array.inject(:*)
-
-array = (1..20).to_a
 primes = []
+exponents = []
 
-array.each do |x|
-	primes << x.prime_division
+(1..20).each do |n|
+	primes << { num: n, primes: n.prime_division }
 end
 
-unique = []
-unique = primes.flatten.each{ |x, y| x[y] }
-unique = unique.uniq
+primes.each do |prime|
+	prime[:primes].each do |k, v|
+		exponents << k ** v
+	end
+end
 
-puts (unique.inject(:*)
+exponents = exponents.uniq!
+p exponents.inject(:*) / 2
+
+
+# check_nums = (2..20).to_a
+# num = 2520
+
+# while true do 
+# 	puts "checking #{num}" if num % 1_000_000 == 0
+# 	check_nums.each do |n|
+# 		if num % n == 0
+# 			if n == check_nums[-1]
+# 				puts num
+# 				exit
+# 			else
+# 				next
+# 			end
+# 		else
+# 			num += 1
+# 			break
+# 		end
+# 	end
+# end
