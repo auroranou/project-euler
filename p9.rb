@@ -13,52 +13,49 @@
 
 # find all unique factor pairs for given integer b
 def find_factors(b)
-	@factors = []
+	factors = []
 	1.upto(Math.sqrt(b)) do |n|
-		@factors << [n, b/n] if b % n == 0
+		factors << [n, b/n] if b % n == 0
 	end
-	return @factors
+	return factors
 end
 
 def pythagorean(b)
+	triples = []
 # if b is EVEN, b = 2mn so b/2 = mn
 	if b.even?
 	# find all factor pairs of b/2
-		find_factors(b/2)
+		factors = find_factors(b/2)
 
-		@factors.each do |factor|
-			m = factors[0]
-			n = factors[1]
+		factors.each do |factor|
+			m = factor[0]
+			n = factor[1]
 
-			a = m ** 2 - n ** 2
+			a = (m ** 2 - n ** 2).abs
 			b = 2 * m * n
 			c = m ** 2 + n ** 2
 
-			triples = []
 			triples << [a, b, c]
 		end
 
 # if b is ODD, b = mn
 	else
 	# find all factor pairs of b
-		find_factors(b)
+		factors = find_factors(b)
 
-		@factors.each do |factor|
-			m = factors[0]
-			n = factors[1]
+		factors.each do |factor|
+			m = factor[0]
+			n = factor[1]
 
 		# a and c must be divided by 2
-			a = (m ** 2 - n ** 2) / 2
+			a = (m ** 2 - n ** 2).abs / 2
 			b = m * n
 			c = (m ** 2 + n ** 2) / 2
 
-			triples = []
 			triples << [a, b, c]
 		end
 	end
 	p triples
 end
-
-pythagorean(24)
 
 # check if a + b + c = 1000
