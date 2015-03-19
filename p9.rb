@@ -13,11 +13,15 @@
 
 # find all unique factor pairs for given integer b
 def find_factors(b)
+
 	factors = []
+	
 	1.upto(Math.sqrt(b)) do |n|
 		factors << [n, b/n] if b % n == 0
 	end
+	
 	return factors
+
 end
 
 def pythagorean(b)
@@ -25,7 +29,8 @@ def pythagorean(b)
 # if b is EVEN, b = 2mn so b/2 = mn
 	if b.even?
 	# find all factor pairs of b/2
-		factors = find_factors(b/2)
+		b = b/2
+		factors = find_factors(b)
 
 		factors.each do |factor|
 			m = factor[0]
@@ -36,6 +41,7 @@ def pythagorean(b)
 			c = m ** 2 + n ** 2
 
 			triples << [a, b, c]
+			return triples
 		end
 
 # if b is ODD, b = mn
@@ -53,9 +59,17 @@ def pythagorean(b)
 			c = (m ** 2 + n ** 2) / 2
 
 			triples << [a, b, c]
+			return triples
 		end
 	end
-	p triples
 end
 
+# b = 2
+# while true do
+# 	p pythagorean(b)
+# 	b += 1
+# 	if b == 10
+# 		break
+# 	end
+# end
 # check if a + b + c = 1000
