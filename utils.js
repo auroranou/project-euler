@@ -57,18 +57,18 @@ function getPrimeFactors(num) {
     if (isDivisible(x, y)) {
       x = x/y;
       primeFactors.push(y);
-      checkIfPrimeFactor(x, y);
+      return checkIfPrimeFactor(x, y);
     } else if (x > y) {
       // While the divisor is less than `num`, increment the divisor until it hits another factor or is larger than `num`
       y += 1;
-      checkIfPrimeFactor(x, y);
+      return checkIfPrimeFactor(x, y);
     } else {
       // Return whatever is in the `primeFactors` array
       return primeFactors;
     }
   }
   
-  checkIfPrimeFactor(num, divisor);
+  return checkIfPrimeFactor(num, divisor);
 }
 
 
