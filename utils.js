@@ -22,6 +22,28 @@ function factorial(num) {
 }
 
 
+function fibonacci(maxIterations, maxValue) {
+  let index = 1;
+  let prev = 1;
+
+  function fib(prev, curr) {
+    let maxReached = (maxIterations && index >= maxIterations) || (maxValue && curr >= maxValue);
+
+    if (maxReached) {
+      return {
+        index: index,
+        value: prev
+      };
+    } else {
+      index += 1;
+      return fib(curr, prev + curr);
+    }
+  }
+
+  return fib(prev, 1);
+}
+
+
 function getFactors(num, flatten) {
   if (!num) return;
   
@@ -85,12 +107,33 @@ function isPrime(num) {
   return factors.length === 2;
 }
 
+// A better primality test
+function isPrimeBeta(num) {
+  if (!num || num === 1) return false;
+  else if (num === 2) return true;
+  else if (num === 3) return true;
+  else if (num === 5) return true;
+  else if (num % 2 === 0) return false;
+  else if (num % 3 === 0) return false;
+  else if (num % 5 === 0) return false;
+
+  let max = Math.ceil(Math.sqrt(num));
+
+  for (let i = max; i > 5; i--) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+
 
 module.exports = {
   deduplicate: deduplicate,
   factorial: factorial,
+  fibonacci: fibonacci,
   getFactors: getFactors,
   getPrimeFactors: getPrimeFactors,
   isDivisible: isDivisible,
   isPrime: isPrime,
+  isPrimeBeta: isPrimeBeta,
 }
