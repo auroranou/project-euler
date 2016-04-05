@@ -13,7 +13,7 @@ let sum = 0;
 
 // Only check even numbers because [1, n] will always be a factor pair and one
 // plus an odd number is always even, i.e. not prime
-for (let n = 10000000; n > 0; n -= 2) {
+for (let n = 100000000; n > 0; n -= 2) {
   if (allDivisorsPrime(n)) {
     sum += n;
   }
