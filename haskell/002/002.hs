@@ -11,9 +11,10 @@ fib = [ a + b | (a, b) <- zip (0 : fib) (0 : 1 : fib) ]
 -- Sublist of Fibonacci numbers less than 4 million
 fibList = takeWhile (< 4000000) fib
 
--- Function that takes a list, returns a list of even elements, and sums them
+-- Function that sums even elements from a list of numbers
+-- This is equivalent to "sumEven list = sum (filter even list)"
 sumEven :: Integral a => [a] -> a
-sumEven list = sum [ x | x <- list, x `mod` 2 == 0 ]
+sumEven = sum . (filter even)
 
 -- Apply sumEven function to the list of Fibonnaci numbers smaller than 4 million
-sum' = sumEven fibList
+ans = sumEven fibList
