@@ -13,6 +13,6 @@ isPrime (p:ps) n
   | n `mod` p == 0 = False -- There are factors
   | otherwise      = isPrime ps n -- Keep going down the list until we return true or false
 
-  -- The 10,001st prime number lives at index 10,000
+-- The 10,001st prime number lives at index 10,000
 ans :: Integer
 ans = primes !! 10000
