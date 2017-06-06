@@ -52,3 +52,4 @@ function getMillionthPermutation(startingCount, millionthPermutationString) {
 
 let answer = getMillionthPermutation(0, '');
 console.log(answer);
+// Time: 94ms
