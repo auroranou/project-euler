@@ -21,28 +21,32 @@ let totalPermutations = factorial(digits.length);
 // This means there are 9! possibilities beginning with each digit
 let permutationsPerDigit = factorial(digits.length - 1);
 
-function getMillionthPermutation(startingCount, string) {
-  // permutationCount stores a reference to the initial number of permutations at which we are starting
-  let permutationCount = startingCount;
-  // digitIndex refers to the index of the number that will eventually be added to the lexographic permutation string
+function getMillionthPermutation(startingCount, millionthPermutationString) {
+  // permutationsPerDigit has to be recalculated each time as digits shrinks in size
+  let permutationsPerDigit = factorial(digits.length - 1);
+  // startingCount indicates the number of permutations at which we should begin
+    // At the 0th position, this is 0
+    // At the 1st position, it is 725,760 (the closest thing to 1million without going over)
+    // And so on
   let digitIndex = 0;
+  // digitIndex tracks the index of the number to be added to millionthPermutationString from the digits array
 
-  while (permutationCount < 1000000) {
-    permutationCount += permutationsPerDigit;
+  while (startingCount < 1000000) {
+    startingCount += permutationsPerDigit;
     digitIndex += 1;
   }
 
-  // Splice out the digit matching the digitIndex (subtract 1 because the loop takes you just over 1million,
-  // and we want the index of the digit that comes right before that)
-  // Splicing also removes the digit from the array, so it won't be used multiple times in the answer string
+  // Splice out the desired digit based on its index
+  // Subtract one since digitIndex actually refers to the number that takes startingCount over 1million
+  // Splicing also removes the digit from the digits array, so no numbers are used multiple times
   let digitString = digits.splice(digitIndex - 1, 1);
-  string += digitString[0] + '';
+  millionthPermutationString += digitString[0] + '';
 
   if (!digits.length) {
-    return string;
+    return millionthPermutationString;
   } else {
-    // Recurse over the remaining digits until all have been used
-    return getMillionthPermutation(permutationCount - permutationsPerDigit, string);
+    // If there are still digits remaining, recurse over the remaining ones
+    return getMillionthPermutation(startingCount - permutationsPerDigit, millionthPermutationString);
   }
 }
 
